@@ -84,7 +84,7 @@ std::wstring GetWindowClassName(HWND hwnd)
     return std::wstring(className);
 }
 
-void printTreeLayout(int depth, bool start = true)
+void PrintTreeLayout(int depth, bool start = true)
 {
     for (int i = 0; i < depth; ++i)
     {
@@ -116,11 +116,11 @@ void TraverseElements(IUIAutomationElement *pElement, int depth = 0)
     pElement->get_CurrentAutomationId(&automationId);
 
     // Print element information (you can modify this part as needed)
-    printTreeLayout(depth);
+    PrintTreeLayout(depth);
     std::wcout << L"Name: " << (name ? name : L"(No Name)") << std::endl;
-    printTreeLayout(depth, false);
+    PrintTreeLayout(depth, false);
     std::wcout << L"LocalizedControlType: " << (localizedControlType ? localizedControlType : L"(empty)") << std::endl;
-    printTreeLayout(depth, false);
+    PrintTreeLayout(depth, false);
     std::wcout << L"AutomationID: " << (automationId ? automationId : L"(empty)") << std::endl;
 
     // Get child elements
