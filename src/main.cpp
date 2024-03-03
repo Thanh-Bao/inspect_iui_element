@@ -4,14 +4,12 @@
 #include <cwctype>
 #include <atlcomcli.h>
 #include <tlhelp32.h>
-
 #include <string.h>
 
 IUIAutomation *pIUIAutomation;
 
 DWORD FindProcessIdByName(const wchar_t *procname)
 {
-
     HANDLE hSnapshot;
     PROCESSENTRY32W pe;
     int pid = 0;
@@ -141,8 +139,15 @@ void TraverseElements(IUIAutomationElement *pElement, int depth = 0)
     SysFreeString(name);
 }
 
-int main()
+int wmain(int argc, wchar_t *argv[])
 {
+
+    if (argc < 2)
+    {
+        std::cout << "No second command-line argument provided." << std::endl;
+        return 1;
+    }
+
     CoInitialize(NULL);
 
     CoCreateInstance(__uuidof(CUIAutomation), NULL, CLSCTX_INPROC_SERVER, IID_IUIAutomation, (void **)&pIUIAutomation);
@@ -169,7 +174,7 @@ int main()
     IUIAutomationElement *pWindow;
     IUIAutomationCondition *pCondition;
 
-    DWORD processID = FindProcessIdByName(L"notepad.exe");
+    DWORD processID = FindProcessIdByName(argv[1]);
 
     HWND handleWindow = FindWindowHandleFromProcessId(processID);
 
@@ -189,7 +194,7 @@ int main()
 
     while (true)
     {
-        // Check if the 'A' key is pressed
+        // Check if the 'Z' key is pressed
         if (GetAsyncKeyState('Z') & 0x8000)
         {
             // std::cout << "'Z' key pressed!" << std::endl;
