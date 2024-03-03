@@ -4,5 +4,5 @@ project(example)
 set(SOURCE_FILES src/main.cpp)
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
-add_executable(main ${SOURCE_FILES})
+add_executable(inspect_iuia ${SOURCE_FILES})
 
